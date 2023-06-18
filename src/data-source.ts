@@ -1,13 +1,14 @@
 import { DataSource } from "typeorm";
 
+
 export const AppDataSource = new DataSource({
     migrationsTableName: 'migrations',
     type: "postgres",
-    host: process.env.HOST,
+    host: process.env.HOST!,
     port: 5432,
-    username: process.env.USER,
-    password: process.env.PASSWORD,
-    database: 'weapon_store',
+    username: process.env.USER!,
+    password: '1234',
+    database: 'crud_user',
     logging: false,
     synchronize: false,
     name: 'default',
