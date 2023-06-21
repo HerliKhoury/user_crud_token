@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createUserService } from "../services/users/createUser.service";
 import { TUser, TUserReq } from "../interfaces/user/user.interface";
 import { catchUserByIdService } from "../services/users/catchUserById.service";
+import { deleteUserByIdService } from "../services/users/deleteUserById.Service";
 
 export const createUserController = async (
     req: Request,
@@ -23,4 +24,15 @@ export const getUserByIdController = async (
     const user:TUser = await catchUserByIdService(userId);
 
     return res.status(200).json(user);
+};
+
+export const deleteUserByIdController = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const userId: number = parseInt(req.params.id);
+
+    await deleteUserByIdService(userId);
+
+    return res.status(204).send();
 };
