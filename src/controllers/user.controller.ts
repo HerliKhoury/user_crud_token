@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { createUserService } from "../services/users/createUser.service";
-import { TUser, TUserReq } from "../interfaces/user/user.interface";
+import { TUser, TUserReq, TUserUpdate } from "../interfaces/user/user.interface";
 import { catchUserByIdService } from "../services/users/catchUserById.service";
 import { deleteUserByIdService } from "../services/users/deleteUserById.Service";
+import { updateUserByIdService } from "../services/users/updateUserById.service";
 
 export const createUserController = async (
     req: Request,
@@ -35,4 +36,16 @@ export const deleteUserByIdController = async (
     await deleteUserByIdService(userId);
 
     return res.status(204).send();
+};
+
+export const updateUserByIdController = async(
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const userId: number = req.body.id;
+    const userData:TUserUpdate = req.body;
+
+    const updatedUser: TUser = await updateUserByIdService(userId, userData);
+
+    return res.status(200).json(updatedUser);
 };
