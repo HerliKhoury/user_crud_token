@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const userSchema= z.object({
+export const userSchema = z.object({
     id: z.number().int().positive(),
     name: z.string().max(45),
     email: z.string().email().max(45),
@@ -11,3 +11,5 @@ export const userSchema= z.object({
 export const userSchemaArr = z.array(userSchema);
 
 export const userSchemaReq = userSchema.omit({id: true});
+
+export const userSchemaRes = userSchema.omit({password: true});
